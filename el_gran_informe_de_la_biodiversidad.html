@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>El gran informe de la biodiversidad | Ecoperiodistas de la biodiversidad </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Javier Martínez Garrido" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.9 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<link rel="stylesheet" type="text/css" href="udl-content.css" />
+<script type="text/javascript" src="udl-content.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"  type="text/css">
+
+
+<style>
+  
+  .z-index {
+    z-index: 999;
+  }
+
+  .select-container {
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+  }
+
+  .font-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    z-index: 999;
+  }
+
+  .fontButtonContainer {
+     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* establece el wrap para que los botones se distribuyan en varias líneas */
+    gap: 5px; /* ajusta el espacio entre los botones */
+    position: static; /* fija la barra de botones en la página: static para que aparezca en la parte superior, fixed para que quede flotando */
+    top: 40px; /* fija la barra de botones en la parte superior de la página */
+    left: 0; /* fija la barra de botones en el margen izquierdo */
+    right: 0; /* fija la barra de botones en el margen derecho */
+    margin: auto; /* centra la barra de botones horizontalmente */
+  }
+    
+  /* Estilo para el desplegable */
+  select {
+    padding: 8px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+  }
+  
+  select option {
+  text-align: left;
+  }
+  
+</style>
+
+<script>
+
+// BatexeGo v3 Juan José de Haro 
+
+// Define los textos que se ven en pantalla. Reemplazar el texto entre comillas
+
+  // Textos del menú desplegable
+    const defaultText = 'Parámetros por defecto:'; //Descripción de la opción por defecto
+    const standardText = 'Fuente estándar'; // Fuente original del documento
+    
+    const dyslexicDesc = 'Dislexia:'; // Descripción de la opción OpenDyslexic  
+    const dyslexicText = 'OpenDyslexic'; 
+    
+    const hyperlegibleDesc = 'Deficiencias visuales:'; // Descripción de la opción Atkinson Hyperlegible
+    const hyperlegibleText = 'Atkinson Hyperlegible'; 
+    
+    const highLegibilityDesc = 'Alta legibilidad:'; // Descripción de las opciones de alta legibilidad
+    const opensansText = 'OpenSans'; 
+    const robotoText = 'Roboto'; 
+    const latoText = 'Lato'; 
+    const montserratText = 'Montserrat'; 
+
+  // Botones aumentar y disminuir fuente
+    const increaseFontText = 'A+'; // Botón para incrementar la fuente
+    const increaseFontTitle = 'Incrementa la fuente'; // Texto emergente al pasar el ratón
+    
+    const decreaseFontText = 'A-'; // Botón para reducir la fuente
+    const decreaseFontTitle = 'Reduce la fuente'; // Texto emergente al pasar el ratón
+
+  // Botón para traducir
+    const translateText = '🌐'; // Texto para el botón de traducción de Google
+    const translateTitle = 'Traduce la página'; // Texto emergente al pasar el ratón
+
+  // Botón para leer / detener la lectura en voz alta
+    let readText = 'Leer'; // Botón para leer en voz alta el contenido de la página
+    const readTextTitle ='Lee en voz alta la selección o la página entera'; // Texto emergente al pasar el ratón
+    
+    const stopText = 'Detener'; // Texto del botón para detener la lectura
+    const stopTextTitle = 'Detiene la lectura'; // Texto emergente al pasar el ratón
+  
+  // Botones para que los botones estén siempre visibles
+    let floatingFix = 'Fijar'; // Texto del botón flotante cuando está sobre el texto
+    let floatingFixTitle = 'Fija la barra de botones en la parte superior'; // Texto emergente al pasar el ratón
+    
+    let floatingFloat = 'Flotar'; //Texto del botón flotante cuando está fijo en la parte superior
+    let floatingFloatTitle = 'La barra permanecerá siempre visible';
+  
+  
+  // Enlace +Info
+    const infoText = '+Info'; // Texto del enlace +Info
+    const infoTextLink = 'https://batexego.bilateria.org'; // Destino del enlace de +Info
+
+// Fin 
+  
+
+  readText = `${readText} (${document.documentElement.lang})`; //Se añade el idioma al botón Leer
+  
+
+  let originalFont;
+  let currentFontSize;
+  let originalFontSize;
+  let isReading = false;
+  let utterance = new SpeechSynthesisUtterance();
+  let googleTranslateWidgetVisible = localStorage.getItem('googleTranslateWidgetVisible');
+
+  function setFont(font) {
+  document.body.style.fontFamily = font;
+  localStorage.setItem('font', font);
+  }
+
+  function setFontSize(size) {
+  currentFontSize = parseInt(window.getComputedStyle(document.body).getPropertyValue('font-size'));
+  currentFontSize += size;
+  document.body.style.fontSize = currentFontSize + 'px';
+  localStorage.setItem('fontSize', currentFontSize + 'px');
+  }
+  
+  
+
+function toggleGoogleTranslateWidget() {
+  if (!googleTranslateWidgetVisible) {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'google-translate-script';
+    document.head.appendChild(script);
+    
+    const googleTranslateElement = document.createElement('div');
+    googleTranslateElement.id = 'google_translate_element';
+    googleTranslateElement.style.position = 'fixed';
+    googleTranslateElement.style.top = '0';
+    googleTranslateElement.style.right = '0';
+    googleTranslateElement.style.zIndex = '1000';
+    document.body.appendChild(googleTranslateElement);
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'auto', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+    };
+
+    googleTranslateWidgetVisible = true;
+    
+  } else {
+    const script = document.getElementById('google-translate-script');
+    script.remove();
+    
+    const googleTranslateElement = document.getElementById('google_translate_element');
+    googleTranslateElement.remove();
+
+    googleTranslateWidgetVisible = false;
+  }
+  localStorage.setItem('googleTranslateWidgetVisible',googleTranslateWidgetVisible);
+}
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    googleTranslateWidgetVisible = JSON.parse(localStorage.getItem('googleTranslateWidgetVisible'));
+  if(googleTranslateWidgetVisible) {
+    googleTranslateWidgetVisible = false;
+    toggleGoogleTranslateWidget();
+  }
+
+    
+  
+    originalFont = window.getComputedStyle(document.body).getPropertyValue('font-family');
+    localStorage.setItem('originalFont', originalFont);
+    let font = localStorage.getItem('font');
+    if (!font) {
+    font = originalFont;
+    }
+    document.body.style.fontFamily = font;
+
+    let fontSize = localStorage.getItem('fontSize');
+    originalFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    localStorage.setItem('originalFontSize', originalFontSize);
+    if (!fontSize) {
+    fontSize = originalFontSize
+    localStorage.setItem('fontSize', fontSize);
+    }
+    document.body.style.fontSize = fontSize;
+
+    const fontButtonContainer = document.createElement('div');
+    fontButtonContainer.classList.add('fontButtonContainer'); 
+    
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select = document.createElement('select');
+    select.classList.add('z-index');
+    const standardOption = document.createElement('option');
+    standardOption.value = 'standard';
+    standardOption.text = standardText;
+
+    const defaultFontOptGroup = document.createElement('optgroup');
+    defaultFontOptGroup.label = defaultText;
+    defaultFontOptGroup.appendChild(standardOption);
+
+    select.appendChild(defaultFontOptGroup);
+
+
+    const dyslexicOption = document.createElement('option');
+    dyslexicOption.value = 'dyslexic';
+    dyslexicOption.text = dyslexicText;
+    select.add(dyslexicOption);
+
+    const dyslexicOptGroup = document.createElement('optgroup');
+    dyslexicOptGroup.label = dyslexicDesc;
+    dyslexicOptGroup.appendChild(dyslexicOption);
+    select.appendChild(dyslexicOptGroup);
+
+    const hyperlegibleOption = document.createElement('option');
+    hyperlegibleOption.value = 'hyperlegible';
+    hyperlegibleOption.text = hyperlegibleText;
+    select.add(hyperlegibleOption);
+
+    const hyperlegibleOptGroup = document.createElement('optgroup');
+    hyperlegibleOptGroup.label = hyperlegibleDesc;
+    hyperlegibleOptGroup.appendChild(hyperlegibleOption);
+    select.appendChild(hyperlegibleOptGroup);
+
+    const opensansOption = document.createElement('option');
+    opensansOption.value = 'Open Sans';
+    opensansOption.text = opensansText;
+    select.add(opensansOption);
+
+    const robotoOption = document.createElement('option');
+    robotoOption.value = 'Roboto';
+    robotoOption.text = robotoText;
+    select.add(robotoOption);
+
+    const latoOption = document.createElement('option');
+    latoOption.value = 'Lato';
+    latoOption.text = latoText;
+    select.add(latoOption);
+
+    const montserratOption = document.createElement('option');
+    montserratOption.value = 'Montserrat';
+    montserratOption.text = montserratText;
+    select.add(montserratOption);  
+    
+
+    const highLegibilityOptGroup = document.createElement('optgroup');
+    highLegibilityOptGroup.label = highLegibilityDesc;
+    highLegibilityOptGroup.appendChild(latoOption);
+    highLegibilityOptGroup.appendChild(montserratOption);
+    highLegibilityOptGroup.appendChild(opensansOption);
+    highLegibilityOptGroup.appendChild(robotoOption);
+    
+    
+    
+    select.appendChild(highLegibilityOptGroup);
+
+    // Seleccionar la opción correspondiente al cargar la página
+    if (font === originalFont) { // Nueva condición
+    select.selectedIndex = 0; // Nueva línea
+    } else if (font === 'OpenDyslexic') {
+    select.selectedIndex = 1;
+    } else if (font === 'Atkinson Hyperlegible') {
+    select.selectedIndex = 2;
+    } else if (font === 'Roboto') {
+    select.selectedIndex = 6;
+    } else if (font === 'Lato') {
+    select.selectedIndex = 3;
+    } else if (font === 'Open Sans') {
+    select.selectedIndex = 5;
+    } else if (font === 'Montserrat') {
+    select.selectedIndex = 4;
+    }
+
+    select.addEventListener('change', () => {
+    const font = select.value;
+    if (font === 'standard') {
+    setFont(originalFont);
+    fontSize = originalFontSize;
+    localStorage.setItem('fontSize', fontSize);
+    document.body.style.fontSize = localStorage.getItem('originalFontSize');
+    } else if (font === 'dyslexic') {
+    setFont('OpenDyslexic');
+    } else if (font === 'hyperlegible') {
+    setFont('Atkinson Hyperlegible');
+    } else if (font === 'Open Sans') {
+    setFont('Open Sans');
+    } else if (font === 'Roboto') {
+    setFont('Roboto');
+    } else if (font === 'Lato') {
+    setFont('Lato');
+    }  else if (font === 'Montserrat') {
+    setFont('Montserrat');
+    }
+    });
+
+    selectContainer.appendChild(select);
+    fontButtonContainer.appendChild(selectContainer);
+    
+
+    const increaseFontButton = document.createElement('button');
+    increaseFontButton.classList.add('font-button');
+    increaseFontButton.textContent = increaseFontText;
+    increaseFontButton.setAttribute('title', increaseFontTitle);
+    increaseFontButton.addEventListener('click', () => setFontSize(1));
+    fontButtonContainer.appendChild(increaseFontButton);
+
+    const decreaseFontButton = document.createElement('button');
+    decreaseFontButton.classList.add('font-button');
+    decreaseFontButton.textContent = decreaseFontText;
+    decreaseFontButton.setAttribute('title', decreaseFontTitle);
+    decreaseFontButton.addEventListener('click', () => setFontSize(-1));
+    fontButtonContainer.appendChild(decreaseFontButton);
+    
+    const translateButton = document.createElement('button');
+    translateButton.classList.add('font-button');
+    translateButton.textContent = translateText;
+    translateButton.setAttribute('title', translateTitle);
+    translateButton.addEventListener('click', toggleGoogleTranslateWidget);
+    fontButtonContainer.appendChild(translateButton);
+
+  // Botón para leer en voz alta
+    const readButton = document.createElement('button');
+    readButton.classList.add('font-button');
+    readButton.textContent = readText;
+    readButton.setAttribute('title', readTextTitle);
+    
+    readButton.addEventListener('click', () => {
+    let selectedText = window.getSelection().toString();
+    let text = '';
+    let lang = document.documentElement.lang;
+    if (selectedText !== '') {
+      text = selectedText;
+      let selectedNode = window.getSelection().anchorNode;
+      while (selectedNode && selectedNode.nodeType !== Node.ELEMENT_NODE) {
+        selectedNode = selectedNode.parentNode;
+      }
+      if (selectedNode) {
+        const selectedLang = selectedNode.getAttribute('lang');
+        if (selectedLang) {
+          lang = selectedLang;
+        }
+      }
+    } else {
+      text = document.body.innerText;
+      const bodyLang = document.body.getAttribute('lang');
+      if (bodyLang) {
+        lang = bodyLang;
+      }
+    }
+
+    utterance.lang = lang;
+    utterance.text = text;
+
+    if (!isReading) {
+      isReading = true;
+      readButton.textContent = `${stopText} (${lang})`;
+      readButton.setAttribute('title', stopTextTitle);
+      speechSynthesis.speak(utterance);
+    } else {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+      speechSynthesis.cancel();
+    }
+
+    utterance.addEventListener('end', () => {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+    });
+  });  
+    
+    fontButtonContainer.appendChild(readButton);
+    
+  // Botón para que la barra esté siempre visible
+    const floatingButton = document.createElement('button');
+    floatingButton.classList.add('font-button');
+    floatingButton.textContent = floatingFloat;
+    floatingButton.setAttribute('title', floatingFloatTitle);
+    floatingButton.addEventListener('click', () => {
+    if (floatingButton.textContent === floatingFix) {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+      localStorage.setItem('floatState', 'static');
+    } else {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+      localStorage.setItem('floatState', 'fixed');
+    }
+  });
+
+    
+
+    let floatState = localStorage.getItem('floatState');
+    if (!floatState) {
+      floatState = 'static';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    }
+    if (floatState === 'fixed') {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    } else {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+    }
+    
+    localStorage.setItem('floatState', floatState);
+    
+  fontButtonContainer.appendChild(floatingButton);
+
+
+    const infoLink = document.createElement('a');
+    infoLink.textContent = infoText;
+    infoLink.href = infoTextLink;
+    infoLink.target = '_blank';
+    infoLink.style.marginLeft = '8px';
+    infoLink.style.fontSize = '12px';
+    fontButtonContainer.appendChild(infoLink);
+
+    
+    infoLink.classList.add('z-index');
+
+    document.body.insertBefore(fontButtonContainer, document.body.firstChild);
+   
+  });
+  
+  
+
+</script>
+</head>
+<body class="exe-web-site" id="exe-node-179"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header"  style="background-image: url(ssaes.jpg); background-repeat: repeat-x;"><div id="headerContent">Ecoperiodistas de la biodiversidad</div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Ecoperiodistas de la biodiversidad</a></li>
+   <li><a href="qu_y_cmo_vamos_a_aprender.html" class="no-ch">¿Qué y cómo vamos a aprender?</a></li>
+   <li class="current-page-parent"><a href="ecoperiodistas_de_la_biodiversidad.html" class="current-page-parent daddy">Ecoperiodistas de la biodiversidad</a>
+   <ul>
+      <li id="active"><a href="el_gran_informe_de_la_biodiversidad.html" class="active no-ch">El gran informe de la biodiversidad</a></li>
+      <li><a href="escuela_de_ecoperiodistas.html" class="no-ch">Escuela de ecoperiodistas</a></li>
+      <li><a href="nos_convertimos_en_redactores.html" class="no-ch">Nos convertimos en redactores</a></li>
+      <li><a href="de_papel_a_las_ondas.html" class="no-ch">De papel a las ondas</a></li>
+      <li><a href="evaluacin.html" class="no-ch">Evaluación</a></li>
+      <li><a href="autoevaluacin.html" class="no-ch">Autoevaluación</a></li>
+   </ul>
+   </li>
+   <li><a href="ficha_tcnica.html" class="no-ch">Ficha técnica</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="ecoperiodistas_de_la_biodiversidad.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="escuela_de_ecoperiodistas.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">El gran informe de la biodiversidad</h1></header>
+<article class="iDevice_wrapper UDLcontentIdevice" id="id880">
+<div class="iDevice emphasis0" >
+<div id="ta880_870_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: justify;"><img src="individual.png" width="50" height="51"> El curso acaba de comenzar cuando la emisora escolar recibe una transmisión urgente de la AES (Agencia de Exploración Sostenible).</p>
+<p style="text-align: justify;"><br>Mensaje de Lía<br>"Necesitamos vuestra ayuda.<br>Hemos encontrado indicios preocupantes sobre varias especies y ecosistemas de nuestro entorno.<br>Disponemos de fotografías, mapas, noticias e informes científicos, pero la información está incompleta."<br>Mensaje de Hugo<br>"No sabemos exactamente qué está ocurriendo.<br>Necesitamos un equipo de EcoPeriodistas que investigue las evidencias, formule hipótesis y reconstruya la historia."<br>Si aceptáis esta misión, recibiréis vuestro primer expediente confidencial.</p>
+<p>Antes de abrir el expediente, responde junto a tu equipo:</p>
+<ul>
+<li style="text-align: justify;"><strong>¿Qué es la biodiversidad?</strong></li>
+<li style="text-align: justify;"><strong>¿Por qué puede ser importante protegerla?</strong></li>
+<li style="text-align: justify;"><strong>¿Qué trabajo realiza un periodista de investigación?</strong></li>
+<li style="text-align: justify;"><strong>¿Qué creéis que puede estar ocurriendo?</strong></li>
+</ul>
+<p><strong>Registrad vuestras primeras ideas en vuestro Cuaderno de EcoPeriodista.</strong></p>
+<p style="text-align: justify;">VUESTRA MISIÓN<br>A partir de hoy os convertiréis en EcoPeriodistas de la Biodiversidad.<br>Vuestra tarea será:<br>✅ Observar pruebas.<br>✅ Formular hipótesis.<br>✅ Investigar información fiable.<br>✅ Descubrir qué está ocurriendo.<br>✅ Informar a la ciudadanía a través de la radio.</p>
+<p style="text-align: justify;"><img src="asset://5770419e-8d1b-10fe-c32f-4f4409beebb9" title="Mensaje clasificado" alt=""></p>
+<div style="position: relative; width: 30%; height: 0; padding-top: 30%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;"><iframe width="300" height="300" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAHVM1mEYRQ/1TtH1wqXTLYn06Ls4l_5Dg/view?embed" allowfullscreen="allowfullscreen"></iframe></div>
+<p style="text-align: justify;"><a href="https://www.canva.com/design/DAHVM1mEYRQ/1TtH1wqXTLYn06Ls4l_5Dg/view?utm_content=DAHVM1mEYRQ&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">1.1 mensaje.pdf</a> de JAVIER MARTÍNEZ GARRIDO</p>
+<p style="text-align: justify;"><br><br></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>📩 Bloque 1: Recepción del informe<br>📢 Mensaje urgente de la AES<br>La emisora de la escuela ha recibido un mensaje de la Agencia de Exploración Sostenible (AES):</p>
+<p>Lía: "La naturaleza está en peligro y la información está incompleta."</p>
+<p>&nbsp;<br>Hugo: "Buscamos EcoPeriodistas para investigar las pruebas."</p>
+<p>&nbsp;<br>❓ Para responder en equipo:<br>🌱 ¿Qué es la biodiversidad y por qué hay que cuidarla?<br>🕵️ ¿Qué trabajo hace un periodista de investigación?</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="el_gran_informe_de_la_biodiversidad.m4a"><a href="el_gran_informe_de_la_biodiversidad.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id5">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Fase 1. Clasificamos la biodiversidad</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta5_892_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: justify;"><img src="grupo.png" width="50" height="50">Tras superar la prueba de acceso de la AES, los EcoPeriodistas reciben un nuevo mensaje:</p>
+<p style="text-align: justify;">"Habéis demostrado que sabéis organizar la información. Sin embargo, seguimos sin saber qué está ocurriendo.</p>
+<p style="text-align: justify;">Necesitamos <strong>clasificar y relacionar las especies por categorías</strong> para meter en una base de datos la clasificación y así poder continuar con la investigación.</p>
+<figure class="exe-figure exe-image position-center license-CC-BY" style="width: 600px;"><img src="oficina.jpg" alt="" width="600" height="600">
+<figcaption class="figcaption"><span class="author">Canva. Imagen generado por IA</span>. <span class="title"><em>Lía y Hugo recibiendo mensaje</em></span> <span class="license"><span class="sep">(</span><a href="http://creativecommons.org/licenses/?lang=es" rel="license nofollow noopener" target="_blank" title="Creative Commons BY">CC BY</a><span class="sep">)</span></span></figcaption>
+</figure>
+<p style="text-align: justify;"><strong>Consigna</strong></p>
+<p style="text-align: justify;">Completad las tres tablas (Anexo I) del Cuaderno del EcoPeriodista:</p>
+<ul>
+<li style="text-align: justify;"><strong>Tabla 1. Animales, plantas y hongos.</strong></li>
+<li style="text-align: justify;"><strong>Tabla 2. Bosque mediterráneo, humedal y pradera-matorral.</strong></li>
+<li style="text-align: justify;"><strong>Tabla 3. Productores, consumidores y descomponedores.</strong></li>
+</ul>
+<p style="text-align: justify;"><span style="color: #e03e2d;">Importante: todos los elementos deben colocarse en orden alfabético.</span><span style="color: #e03e2d;"></span></p>
+<p style="text-align: left;"><span style="color: #000000;">Anexo 1. <a href="Ficha_Continua_EcoPeriodista_Alfabetica.pdf">Tablas</a></span></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>🏷️ Fase 1: Clasificamos la biodiversidad<br>📝 Completa las 3 tablas del cuaderno (Anexo II):<br>Tabla 1: Animales, Plantas y Hongos.<br>Tabla 2: Bosque mediterráneo, Humedal y Pradera-matorral.<br>Tabla 3: Productores, Consumidores y Descomponedores.<br>⚠️ REGLA: Escribe las palabras en orden alfabético.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="fase_1.m4a"><a href="fase_1.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Orientaciones metodológicas</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>Objetivo de la actividad:</strong> Clasificar y estructurar la información biológica mediante tres criterios de ordenación (reinos, ecosistemas y niveles tróficos) aplicando la capacidad de categorización y el orden alfabético estricto.</p>
+<p><strong>Agrupamiento:</strong> Equipos cooperativos (redacciones periodísticas de 3 a 4 alumnos).</p>
+<p><strong>Pautas de Ejecución en el Aula</strong><br>Gestión del encargo: El alumnado asume el rol de investigación tras recibir el mensaje de Javier, Lía y Hugo. Debe utilizar los datos recopilados en el Anexo I para transferirlos a las tres tablas del Anexo II.<br>Mecánica de ordenación: Recordar explícitamente al alumnado la restricción de la consigna: todos los elementos de cada columna deben quedar ordenados alfabéticamente para garantizar el volcado correcto en la base de datos simulada.</p>
+<p><br><strong>Proceso de resolución:</strong></p>
+<p>Identificar la lista completa de especies/organismos facilitados en el material del alumno.<br title="Ficha_Docente_Alfabetica_SOLUCIONES.pdf">Clasificar cada elemento en su categoría correspondiente dentro de las tres tablas.<br>Aplicar el filtro de orden alfabético en cada columna antes de dar por finalizado el Cuaderno del EcoPeriodista.<br>Estructura de las Tablas (<a href="Ficha_Docente_Alfabetica_SOLUCIONES.pdf" download="Ficha_Docente_Alfabetica_SOLUCIONES.pdf" title="Ficha_Docente_Alfabetica_SOLUCIONES.pdf">Solucionario / Plantilla)</a></p>
+<p>Técnica: Lista de cotejo de la actividad del Cuaderno del EcoPeriodista<br><br></p>
+<p><strong>Criterios clave:</strong></p>
+<ul>
+<li>Categorización correcta según criterios biológicos (reino, ecosistema y función trófica).</li>
+<li>Cumplimiento riguroso del criterio de ordenación alfabética en todas las filas y columnas.</li>
+<li>Colaboración y resolución conjunta del reto dentro del equipo de ecoperiodismo.</li>
+</ul></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id3">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Fase 2. Pistas perdidas</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta3_890_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: justify;"><img src="grupo.png" width="50" height="50">Hemos conseguido identificar tres especies importantes para la investigación.<br>Sin embargo, durante una avería informática se han perdido las relaciones entre las especies y las amenazas que las afectan, aunque hemos podido recuperar tres de ellas.<br>Solo se han conservado tres informes parciales.<br>Si conseguís <strong>reconstruir correctamente la relación de amenaza-especie,</strong> podréis acceder al sistema de navegación de Codey Rocky.</p>
+<figure class="exe-figure exe-image position-center license-CC-BY" style="width: 600px;"><img src="ordenador_averia.jpg" alt="" width="600" height="600">
+<figcaption class="figcaption"><span class="author">Canva. Imagen generada por IA</span>. <span class="title"><em>Avería informática</em></span> <span class="license"><span class="sep">(</span><a href="http://creativecommons.org/licenses/?lang=es" rel="license nofollow noopener" target="_blank" title="Creative Commons BY">CC BY</a><span class="sep">)</span></span></figcaption>
+</figure>
+<p style="text-align: justify;">Cada equipo recibe tres sobres.<br>Sobre A<br>📄 Pista:<br>"La disminución del agua disponible reduce el oxígeno de los ríos y complica la supervivencia de muchas especies acuáticas."<br>&nbsp;<br>Sobre B<br>📄 Pista:<br>"Los productos químicos empleados en agricultura afectan especialmente a los insectos polinizadores."<br>&nbsp;<br>Sobre C<br>📄 Pista:<br>"La destrucción del bosque provoca la pérdida de refugio y alimento para muchas aves."</p>
+<p style="text-align: justify;">Anexo II. <a href="tarjetas_amenazas.png" title="tarjetas amenazas.png" target="_blank" rel="noopener">Tarjetas medioambientales</a></p>
+<p style="text-align: justify;">Anexo III. <a href="Tarjetas_CodeyRocky_Amenazas_50porciento.pdf" download="Tarjetas_CodeyRocky_Amenazas_50porciento.pdf" title="Tarjetas_CodeyRocky_Amenazas_50porciento.pdf">Tarjetas colores para codey rocky</a></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>🔎 Fase 2: Pistas perdidas<br>✉️ Analiza las pistas de los sobres:<br>🌊 Sobre A: La falta de agua afecta a la trucha (Amenaza: Sequía).<br>🐝 Sobre B: Los productos químicos dañan a la abeja (Amenaza: Pesticidas).<br>🐦 Sobre C: Incendiar el bosque perjudica al herrerillo (Amenaza: Incendio).</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="fase_2.m4a"><a href="fase_2.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Orientaciones metodológicas</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>Objetivo de la actividad: </strong>Descodificar las relaciones de causa-efecto entre las amenazas medioambientales y las especies afectadas a partir de pistas textuales, vinculando las soluciones al sistema de navegación de Codey Rocky mediante un código de colores.</p>
+<p><strong>Agrupamiento: </strong>Equipos cooperativos (redacciones periodísticas de 3 a 4 alumnos).</p>
+<p><strong>Pautas de Ejecución en el Aula</strong><br>Gestión del encargo: Tras el mensaje de Javier sobre la avería informática, cada equipo recibe los tres sobres con las pistas. Su misión es reconstruir la relación entre la amenaza, la especie afectada y la tarjeta de color correspondiente del Anexo III para desbloquear a Codey Rocky.</p>
+<p><br><strong>Mecánica de resolución:</strong></p>
+<p>Abrir los sobres A, B y C y analizar el texto descriptivo de cada pista.<br>Relacionar cada pista con la tarjeta de amenaza del anexo II y de especie de la tabla de la actividad anterior.<br>Asignar el color correspondiente del Anexo III según el tipo de amenaza/especie identificada para programar o validar la secuencia en Codey Rocky. EL color de las tarjetas de amenazas representa el color de las tarjetas de colores para que puedan ser leídas por el robot.</p>
+<p><br><strong>Asociación de Sobres, Amenazas y Colores</strong></p>
+<p>Sobre A<br style="clear: both;">Pista: "La disminución del agua disponible reduce el oxígeno de los ríos..."<br>Amenaza / Especie: Sequía / Trucha.<br>Tarjeta de Color (Codey Rocky): (Verde)</p>
+<p><br>Sobre B<br style="clear: both;">Pista: "Los productos químicos empleados en agricultura afectan especialmente..."<br>Amenaza / Especie: Pesticidas / Abeja.<br>Tarjeta de Color (Codey Rocky): (Amarillo)</p>
+<p>Sobre C<br style="clear: both;">Pista: "La destrucción del bosque provoca la pérdida de refugio..."<br>Amenaza / Especie: Incendio / Herrerillo<br>Tarjeta de Color (Codey Rocky): (Rojo)</p>
+<p>Puede parecer que la relación sea dificil, pero lo bueno es que en la clasificación solo hay un pez para el sobre A, solo hay un polinizador para el sobre B y y solo hay un pájaro para el sobre C.</p>
+<p><br><strong>Evaluación y Feedback</strong><br>Técnica: Registro de observación directa y comprobación de la secuencia en Codey Rocky.</p>
+<p><strong>Criterios clave:</strong></p>
+<ul>
+<li>Identificación correcta de la relación causa-efecto entre la amenaza descrita y la especie afectada.</li>
+<li>Traducción precisa de las soluciones al código de colores (Anexo III) para el sistema de navegación.</li>
+<li>Trabajo colaborativo, razonamiento deductivo y reparto de funciones en el equipo.</li>
+</ul></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id6">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Fase  3 Descubrimos las coordenadas y comprobamos amenazas.</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta6_893_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><img src="grupo.png" alt="" width="50" height="50">Habéis conseguido identificar las amenazas que afectan a las especies investigadas. &nbsp;Sin embargo, la AES necesita comprobar que las relaciones son correctas antes de continuar la investigación y adivinar cuales son las coordinadas de navegación en el tapete codey rocky</p>
+<p style="text-align: left;">Para ello <strong>utilizaréis Codey Rocky</strong>, nuestro asistente tecnológico.<br>&nbsp;<br>🔍 ¿Qué debéis hacer?</p>
+<ul>
+<li style="text-align: left;">Colocar las<strong> tarjetas de amenazas</strong> en el panel de codey rocky, según el <strong>lugar</strong> que ocupe en la <strong>tabla</strong>.</li>
+<li style="text-align: left;">Observar de <strong>izquierda a derecha que orden</strong> de colores hay viendo las tarjetas de amenazas.</li>
+<li style="text-align: left;">Colocar en orden las<strong> tarjetas de colores</strong> fuera del panel para que codey rocky pueda leerlas. Para ello codey rocky tendrá cargado un programa de verificación para comprobar si está bien.</li>
+<li style="text-align: left;">Observad la respuesta del robot, si codey rocky <strong>pone un chek</strong> una vez pasado por las tarjetas de colores en orden, <strong>podréis continu</strong>ar, y si pone <strong>una x</strong> <strong>tenéis que volver a intentar</strong> ya que habréis fallado en la&nbsp; relación de amenazas y especies.</li>
+</ul></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>🤖 Fase 3: Coordenadas con Codey Rocky<br>🚦 Comprobación con el robot:<br>Coloca las tarjetas de amenazas en el panel según la tabla.<br>Mira el orden de los colores de izquierda a derecha.<br>Pon las tarjetas de colores en el suelo y pasa a Codey Rocky por encima:</p>
+<p>✅ CHECK (✓): Es correcto y obtienes las coordenadas.<br>❌ CRUZ (X): Hay un error y debéis revisar las tablas.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="fase_3.m4a"><a href="fase_3.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Orientaciones metodológicas</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>Objetivo de la activida</strong>d: Comprobar y validar las relaciones entre especies y amenazas mediante la programación/lectura cromática de Codey Rocky, obteniendo el código o coordenadas para avanzar en el tapete de navegación.</p>
+<p><strong>Agrupamiento:</strong> Equipos cooperativos (redacciones periodísticas de 3 a 4 alumnos).</p>
+<p><strong>Pautas de Ejecución en el Aula</strong><br>Gestión del encargo: El alumnado actúa como equipo técnico de la AES. Debe trasladar las hipótesis de asociación obtenidas previamente al panel de Codey Rocky para someterlas a la prueba de verificación algorítmica.</p>
+<p><br><strong>Mecánica de resolución:</strong></p>
+<p>Ubicar las tarjetas de amenazas en el panel de Codey Rocky respetando la posición asignada en la tabla.<br>Leer la secuencia de colores resultante de izquierda a derecha a partir de las tarjetas colocadas.<br>Disponer la fila de tarjetas de colores en el suelo/mesa en el orden exacto para que el sensor de color de Codey Rocky las escanee de forma secuencial.<br>Ejecutar el programa de verificación en el robot y analizar la respuesta en su pantalla LED (Check ✓ para avanzar; Cruz X para revisar la clasificación de las tarjetas).</p>
+<p><br><strong>Estructura de la Actividad (Solucionario / Plantilla)</strong><br>Secuencia de Verificación y Control de Respuesta</p>
+<p>Entrada de datos (Panel y Fila de Colores)</p>
+<p><a href="SOLUCION_COLORES-ANIMALC.pdf" download="SOLUCIÓN COLORES-ANIMALÇ.pdf" title="SOLUCIÓN COLORES-ANIMALÇ.pdf">SOLUCIÓN COLORES-ANIMAL</a></p>
+<p><a href="TARJETA_COLORES_SOLUCION.pdf" download="TARJETA COLORES SOLUCIÓN.pdf" title="TARJETA COLORES SOLUCIÓN.pdf">ORDEN COMPROBACIÓN COLOR</a></p>
+<p>Pantalla pantalla LED: ✓ (Check) → Coordinadas de navegación desbloqueadas. El equipo continúa con la investigación en el tapete.<br>Pantalla pantalla LED: X (Cruz) → Error en la secuencia. El equipo debe revisar la tabla de amenazas y corregir el orden de las tarjetas antes de volver a escanear.</p>
+<p><a href="https://drive.google.com/file/d/1Gu9yHKBliyN1kOocWLjF715mZL4YYMU9/view?usp=sharing">PROGRAMA A CARGAR EN MBLOCK PARA COMPROBACIÓN</a></p>
+<p><strong>Evaluación y Feedback</strong><br>Técnica: Observación sistemática del proceso de verificación robótica.</p>
+<p><br><strong>Criterios clave:</strong></p>
+<p>Traducción correcta del orden espacial de las amenazas a la secuencia cromática lineal.<br>Manejo adecuado del robot Codey Rocky y comprensión de su feedback digital (✓ / X).<br>Capacidad de autorregulación y corrección de errores en equipo ante un resultado negativo.</p></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id7">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Fase 4. Misión codey rocky. La ruta más eficiente.</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta7_894_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><figure class="exe-figure exe-image position-center license-CC-BY" style="width: 600px;"><img src="codey_rocky.jpg" alt="" width="600" height="600">
+<figcaption class="figcaption"><span class="author">Canva. Imagen generada con IA</span>. <span class="title"><em>Codey ROcky</em></span> <span class="license"><span class="sep">(</span><a href="http://creativecommons.org/licenses/?lang=es" rel="license nofollow noopener" target="_blank" title="Creative Commons BY">CC BY</a><span class="sep">)</span></span></figcaption>
+</figure>
+<p style="text-align: left;"><img src="grupo.png" alt="" width="49" height="49"></p>
+<p style="text-align: left;"><strong>Paso 1. Observad el tablero.</strong><br>Analizad la posición de todas las tarjetas.<br>Pensad:</p>
+<ul style="text-align: left;">
+<li style="text-align: justify;">¿Por dónde debe empezar Codey Rocky?</li>
+<li style="text-align: justify;">¿Cuál es el recorrido más corto?</li>
+<li style="text-align: justify;">¿Cuántos movimientos son necesarios?</li>
+</ul>
+<p style="text-align: left;"><strong>Paso 2. Programad la ruta.</strong><br>Codey Rocky deberá realizar el recorrido utilizando el menor número de movimientos posible de izquierda a derecha.<br>&nbsp;<br><strong>Paso 3. Ejecutar y comprobad vuestra solución.</strong></p>
+<p style="text-align: left;">Después de ejecutar el programa, registrad vuestra predicción.</p>
+<ul>
+<li style="text-align: left;">Mi recorrido</li>
+<li>Número total de movimientos&nbsp;</li>
+</ul>
+<p><strong>Paso 4. Ejecutad el programa</strong><br>Cuando Codey Rocky complete el recorrido, cargad el archivo de validación proporcionado por la AES.<br><br><br></p>
+<p style="text-align: left;">Pienso como un programador<br><strong>Al finalizar, responded:</strong></p>
+<ul>
+<li style="text-align: left;">¿Qué estrategia habéis seguido para reducir el número de movimientos?</li>
+<li style="text-align: left;">¿Había más de una solución posible?</li>
+<li style="text-align: left;">¿Qué relación existe entre la programación y la investigación científica?</li>
+</ul></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>🗺️ Fase 4: Misión Codey Rocky<br>🚀 Programación eficiente:<br>Observa: Busca el camino más corto en el tablero.<br>Programa: Usa el menor número de movimientos.<br>Comprueba: Haz funcionar al robot y anota los pasos en tu cuaderno.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="fase_4.m4a"><a href="fase_4.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Orientaciones metolodológicas</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>Objetivo de la actividad:</strong> Diseñar, optimizar y validar algoritmos de navegación para Codey Rocky en un tablero, trabajando el pensamiento computacional (optimización de rutas, predicción de resultados y metacognición) aplicado al proceso de investigación científica de la AES.</p>
+<p><strong>Agrupamiento:</strong> Equipos cooperativos ( de 3 a 4 alumnos).</p>
+<p><strong>Pautas de Ejecución en el Aula</strong><br>Gestión del encargo: El alumnado asume el rol de programadores de la AES. Su misión es llevar a robot desde el punto de inicio hasta el objetivo final en el tablero minimizando la cantidad de instrucciones de desplazamiento.</p>
+<p><br><strong>Mecánica de resolución</strong></p>
+<p><em>Se necesita poner una tabla de cuadrados de 15x15 en el suelo. Es ideal utilizar plastico transparente con las líneas pintadas con rotulador permanente. Cada tabla estará formada por 2 grupos de 4, por lo que cada grupo tendra una mitad</em><strong>.&nbsp;</strong></p>
+<p>Análisis espacial (Paso 1): Identificar la casilla de salida, la meta. Debatir en equipo la ruta óptima de izquierda a derecha.<br>Codificación eficiente (Paso 2): Escribir la secuencia de comandos en programa codeyrocky&nbsp; empleando la menor cantidad de bloques/pasos posibles (promoviendo el uso de bucles si la herramienta lo permite). En acción</p>
+<figure class="exe-figure exe-image position-center" style="width: 700px;"><img src="codey_rocky.png" alt="" title="Instrucciones " width="700" height="235">
+<figcaption class="figcaption"><span class="author">Javier Martínez</span></figcaption>
+</figure>
+<p><br>Predicción y registro (Paso 3): Anotar en el cuaderno de equipo el trayecto estimado y el recuento exacto de movimientos antes de dar la orden de inicio.<br>Reflexión metacognitiva (Pienso como un programador): Responder colectivamente a las preguntas de análisis sobre estrategias de optimización, rutas alternativas y paralelismo entre el método científico y el pensamiento algorítmico.<br>Estructura de la Actividad <a href="solucion_codey_rocky.pdf" download="solución codey rocky.pdf" title="solución codey rocky.pdf">(Solucionario / Plantilla)</a></p>
+<p><strong>Ampliación</strong>. Se puede poner obstáculos por el camino</p>
+<p><strong>Hoja de Registro del Equipo</strong></p>
+<ul>
+<li>Punto de inicio: Casilla de origen en el tablero.</li>
+<li>Ruta diseñada (Mi recorrido): Secuencia de comandos (ej. Avanzar 2 casillas → Gira 90° Dcha → Avanzar 1 casilla).</li>
+<li>Número total de movimientos: ____ pasos/bloques.</li>
+<li>Resultado de la ejecución: Exitoso o Requiere depuración (debugging).<br>Reflexión Metacognitiva (Pienso como un programador)</li>
+<li>Estrategia de optimización: Selección de líneas rectas, eliminación de giros innecesarios o agrupamiento de instrucciones repetidas en bucles.</li>
+<li>Rutas alternativas: Análisis de trayectorias equivalentes en número de pasos pero con diferente distribución espacial.</li>
+<li>Conexión Programación - Ciencia: Comprensión de que ambas disciplinas requieren formular hipótesis (predicción), probar mediante experimentos (ejecución), depurar errores (revisión de datos) y buscar la eficiencia en la solución de problemas complejos.</li>
+</ul>
+<p><strong>Evaluación y Feedback</strong><br>Técnica: Escala de observación del proceso de programación y diana de autoevaluación grupal.</p>
+<p><br><strong>Criterios clave:</strong></p>
+<p>Diseño de algoritmos eficientes (minimización del número de movimientos).<br>Precisión en la fase de predicción y registro previo a la prueba real.<br>Reflexión crítica sobre las decisiones tomadas y transferencia del pensamiento computacional a la investigación científica.</p></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Reconocimiento Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="ecoperiodistas_de_la_biodiversidad.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="escuela_de_ecoperiodistas.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_style_js.js"></script></body></html>

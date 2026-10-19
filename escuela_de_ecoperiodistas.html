@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>Escuela de ecoperiodistas | Ecoperiodistas de la biodiversidad </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Javier Martínez Garrido" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.9 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<link rel="stylesheet" type="text/css" href="udl-content.css" />
+<script type="text/javascript" src="udl-content.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"  type="text/css">
+
+
+<style>
+  
+  .z-index {
+    z-index: 999;
+  }
+
+  .select-container {
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+  }
+
+  .font-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    z-index: 999;
+  }
+
+  .fontButtonContainer {
+     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* establece el wrap para que los botones se distribuyan en varias líneas */
+    gap: 5px; /* ajusta el espacio entre los botones */
+    position: static; /* fija la barra de botones en la página: static para que aparezca en la parte superior, fixed para que quede flotando */
+    top: 40px; /* fija la barra de botones en la parte superior de la página */
+    left: 0; /* fija la barra de botones en el margen izquierdo */
+    right: 0; /* fija la barra de botones en el margen derecho */
+    margin: auto; /* centra la barra de botones horizontalmente */
+  }
+    
+  /* Estilo para el desplegable */
+  select {
+    padding: 8px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+  }
+  
+  select option {
+  text-align: left;
+  }
+  
+</style>
+
+<script>
+
+// BatexeGo v3 Juan José de Haro 
+
+// Define los textos que se ven en pantalla. Reemplazar el texto entre comillas
+
+  // Textos del menú desplegable
+    const defaultText = 'Parámetros por defecto:'; //Descripción de la opción por defecto
+    const standardText = 'Fuente estándar'; // Fuente original del documento
+    
+    const dyslexicDesc = 'Dislexia:'; // Descripción de la opción OpenDyslexic  
+    const dyslexicText = 'OpenDyslexic'; 
+    
+    const hyperlegibleDesc = 'Deficiencias visuales:'; // Descripción de la opción Atkinson Hyperlegible
+    const hyperlegibleText = 'Atkinson Hyperlegible'; 
+    
+    const highLegibilityDesc = 'Alta legibilidad:'; // Descripción de las opciones de alta legibilidad
+    const opensansText = 'OpenSans'; 
+    const robotoText = 'Roboto'; 
+    const latoText = 'Lato'; 
+    const montserratText = 'Montserrat'; 
+
+  // Botones aumentar y disminuir fuente
+    const increaseFontText = 'A+'; // Botón para incrementar la fuente
+    const increaseFontTitle = 'Incrementa la fuente'; // Texto emergente al pasar el ratón
+    
+    const decreaseFontText = 'A-'; // Botón para reducir la fuente
+    const decreaseFontTitle = 'Reduce la fuente'; // Texto emergente al pasar el ratón
+
+  // Botón para traducir
+    const translateText = '🌐'; // Texto para el botón de traducción de Google
+    const translateTitle = 'Traduce la página'; // Texto emergente al pasar el ratón
+
+  // Botón para leer / detener la lectura en voz alta
+    let readText = 'Leer'; // Botón para leer en voz alta el contenido de la página
+    const readTextTitle ='Lee en voz alta la selección o la página entera'; // Texto emergente al pasar el ratón
+    
+    const stopText = 'Detener'; // Texto del botón para detener la lectura
+    const stopTextTitle = 'Detiene la lectura'; // Texto emergente al pasar el ratón
+  
+  // Botones para que los botones estén siempre visibles
+    let floatingFix = 'Fijar'; // Texto del botón flotante cuando está sobre el texto
+    let floatingFixTitle = 'Fija la barra de botones en la parte superior'; // Texto emergente al pasar el ratón
+    
+    let floatingFloat = 'Flotar'; //Texto del botón flotante cuando está fijo en la parte superior
+    let floatingFloatTitle = 'La barra permanecerá siempre visible';
+  
+  
+  // Enlace +Info
+    const infoText = '+Info'; // Texto del enlace +Info
+    const infoTextLink = 'https://batexego.bilateria.org'; // Destino del enlace de +Info
+
+// Fin 
+  
+
+  readText = `${readText} (${document.documentElement.lang})`; //Se añade el idioma al botón Leer
+  
+
+  let originalFont;
+  let currentFontSize;
+  let originalFontSize;
+  let isReading = false;
+  let utterance = new SpeechSynthesisUtterance();
+  let googleTranslateWidgetVisible = localStorage.getItem('googleTranslateWidgetVisible');
+
+  function setFont(font) {
+  document.body.style.fontFamily = font;
+  localStorage.setItem('font', font);
+  }
+
+  function setFontSize(size) {
+  currentFontSize = parseInt(window.getComputedStyle(document.body).getPropertyValue('font-size'));
+  currentFontSize += size;
+  document.body.style.fontSize = currentFontSize + 'px';
+  localStorage.setItem('fontSize', currentFontSize + 'px');
+  }
+  
+  
+
+function toggleGoogleTranslateWidget() {
+  if (!googleTranslateWidgetVisible) {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'google-translate-script';
+    document.head.appendChild(script);
+    
+    const googleTranslateElement = document.createElement('div');
+    googleTranslateElement.id = 'google_translate_element';
+    googleTranslateElement.style.position = 'fixed';
+    googleTranslateElement.style.top = '0';
+    googleTranslateElement.style.right = '0';
+    googleTranslateElement.style.zIndex = '1000';
+    document.body.appendChild(googleTranslateElement);
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'auto', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+    };
+
+    googleTranslateWidgetVisible = true;
+    
+  } else {
+    const script = document.getElementById('google-translate-script');
+    script.remove();
+    
+    const googleTranslateElement = document.getElementById('google_translate_element');
+    googleTranslateElement.remove();
+
+    googleTranslateWidgetVisible = false;
+  }
+  localStorage.setItem('googleTranslateWidgetVisible',googleTranslateWidgetVisible);
+}
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    googleTranslateWidgetVisible = JSON.parse(localStorage.getItem('googleTranslateWidgetVisible'));
+  if(googleTranslateWidgetVisible) {
+    googleTranslateWidgetVisible = false;
+    toggleGoogleTranslateWidget();
+  }
+
+    
+  
+    originalFont = window.getComputedStyle(document.body).getPropertyValue('font-family');
+    localStorage.setItem('originalFont', originalFont);
+    let font = localStorage.getItem('font');
+    if (!font) {
+    font = originalFont;
+    }
+    document.body.style.fontFamily = font;
+
+    let fontSize = localStorage.getItem('fontSize');
+    originalFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    localStorage.setItem('originalFontSize', originalFontSize);
+    if (!fontSize) {
+    fontSize = originalFontSize
+    localStorage.setItem('fontSize', fontSize);
+    }
+    document.body.style.fontSize = fontSize;
+
+    const fontButtonContainer = document.createElement('div');
+    fontButtonContainer.classList.add('fontButtonContainer'); 
+    
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select = document.createElement('select');
+    select.classList.add('z-index');
+    const standardOption = document.createElement('option');
+    standardOption.value = 'standard';
+    standardOption.text = standardText;
+
+    const defaultFontOptGroup = document.createElement('optgroup');
+    defaultFontOptGroup.label = defaultText;
+    defaultFontOptGroup.appendChild(standardOption);
+
+    select.appendChild(defaultFontOptGroup);
+
+
+    const dyslexicOption = document.createElement('option');
+    dyslexicOption.value = 'dyslexic';
+    dyslexicOption.text = dyslexicText;
+    select.add(dyslexicOption);
+
+    const dyslexicOptGroup = document.createElement('optgroup');
+    dyslexicOptGroup.label = dyslexicDesc;
+    dyslexicOptGroup.appendChild(dyslexicOption);
+    select.appendChild(dyslexicOptGroup);
+
+    const hyperlegibleOption = document.createElement('option');
+    hyperlegibleOption.value = 'hyperlegible';
+    hyperlegibleOption.text = hyperlegibleText;
+    select.add(hyperlegibleOption);
+
+    const hyperlegibleOptGroup = document.createElement('optgroup');
+    hyperlegibleOptGroup.label = hyperlegibleDesc;
+    hyperlegibleOptGroup.appendChild(hyperlegibleOption);
+    select.appendChild(hyperlegibleOptGroup);
+
+    const opensansOption = document.createElement('option');
+    opensansOption.value = 'Open Sans';
+    opensansOption.text = opensansText;
+    select.add(opensansOption);
+
+    const robotoOption = document.createElement('option');
+    robotoOption.value = 'Roboto';
+    robotoOption.text = robotoText;
+    select.add(robotoOption);
+
+    const latoOption = document.createElement('option');
+    latoOption.value = 'Lato';
+    latoOption.text = latoText;
+    select.add(latoOption);
+
+    const montserratOption = document.createElement('option');
+    montserratOption.value = 'Montserrat';
+    montserratOption.text = montserratText;
+    select.add(montserratOption);  
+    
+
+    const highLegibilityOptGroup = document.createElement('optgroup');
+    highLegibilityOptGroup.label = highLegibilityDesc;
+    highLegibilityOptGroup.appendChild(latoOption);
+    highLegibilityOptGroup.appendChild(montserratOption);
+    highLegibilityOptGroup.appendChild(opensansOption);
+    highLegibilityOptGroup.appendChild(robotoOption);
+    
+    
+    
+    select.appendChild(highLegibilityOptGroup);
+
+    // Seleccionar la opción correspondiente al cargar la página
+    if (font === originalFont) { // Nueva condición
+    select.selectedIndex = 0; // Nueva línea
+    } else if (font === 'OpenDyslexic') {
+    select.selectedIndex = 1;
+    } else if (font === 'Atkinson Hyperlegible') {
+    select.selectedIndex = 2;
+    } else if (font === 'Roboto') {
+    select.selectedIndex = 6;
+    } else if (font === 'Lato') {
+    select.selectedIndex = 3;
+    } else if (font === 'Open Sans') {
+    select.selectedIndex = 5;
+    } else if (font === 'Montserrat') {
+    select.selectedIndex = 4;
+    }
+
+    select.addEventListener('change', () => {
+    const font = select.value;
+    if (font === 'standard') {
+    setFont(originalFont);
+    fontSize = originalFontSize;
+    localStorage.setItem('fontSize', fontSize);
+    document.body.style.fontSize = localStorage.getItem('originalFontSize');
+    } else if (font === 'dyslexic') {
+    setFont('OpenDyslexic');
+    } else if (font === 'hyperlegible') {
+    setFont('Atkinson Hyperlegible');
+    } else if (font === 'Open Sans') {
+    setFont('Open Sans');
+    } else if (font === 'Roboto') {
+    setFont('Roboto');
+    } else if (font === 'Lato') {
+    setFont('Lato');
+    }  else if (font === 'Montserrat') {
+    setFont('Montserrat');
+    }
+    });
+
+    selectContainer.appendChild(select);
+    fontButtonContainer.appendChild(selectContainer);
+    
+
+    const increaseFontButton = document.createElement('button');
+    increaseFontButton.classList.add('font-button');
+    increaseFontButton.textContent = increaseFontText;
+    increaseFontButton.setAttribute('title', increaseFontTitle);
+    increaseFontButton.addEventListener('click', () => setFontSize(1));
+    fontButtonContainer.appendChild(increaseFontButton);
+
+    const decreaseFontButton = document.createElement('button');
+    decreaseFontButton.classList.add('font-button');
+    decreaseFontButton.textContent = decreaseFontText;
+    decreaseFontButton.setAttribute('title', decreaseFontTitle);
+    decreaseFontButton.addEventListener('click', () => setFontSize(-1));
+    fontButtonContainer.appendChild(decreaseFontButton);
+    
+    const translateButton = document.createElement('button');
+    translateButton.classList.add('font-button');
+    translateButton.textContent = translateText;
+    translateButton.setAttribute('title', translateTitle);
+    translateButton.addEventListener('click', toggleGoogleTranslateWidget);
+    fontButtonContainer.appendChild(translateButton);
+
+  // Botón para leer en voz alta
+    const readButton = document.createElement('button');
+    readButton.classList.add('font-button');
+    readButton.textContent = readText;
+    readButton.setAttribute('title', readTextTitle);
+    
+    readButton.addEventListener('click', () => {
+    let selectedText = window.getSelection().toString();
+    let text = '';
+    let lang = document.documentElement.lang;
+    if (selectedText !== '') {
+      text = selectedText;
+      let selectedNode = window.getSelection().anchorNode;
+      while (selectedNode && selectedNode.nodeType !== Node.ELEMENT_NODE) {
+        selectedNode = selectedNode.parentNode;
+      }
+      if (selectedNode) {
+        const selectedLang = selectedNode.getAttribute('lang');
+        if (selectedLang) {
+          lang = selectedLang;
+        }
+      }
+    } else {
+      text = document.body.innerText;
+      const bodyLang = document.body.getAttribute('lang');
+      if (bodyLang) {
+        lang = bodyLang;
+      }
+    }
+
+    utterance.lang = lang;
+    utterance.text = text;
+
+    if (!isReading) {
+      isReading = true;
+      readButton.textContent = `${stopText} (${lang})`;
+      readButton.setAttribute('title', stopTextTitle);
+      speechSynthesis.speak(utterance);
+    } else {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+      speechSynthesis.cancel();
+    }
+
+    utterance.addEventListener('end', () => {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+    });
+  });  
+    
+    fontButtonContainer.appendChild(readButton);
+    
+  // Botón para que la barra esté siempre visible
+    const floatingButton = document.createElement('button');
+    floatingButton.classList.add('font-button');
+    floatingButton.textContent = floatingFloat;
+    floatingButton.setAttribute('title', floatingFloatTitle);
+    floatingButton.addEventListener('click', () => {
+    if (floatingButton.textContent === floatingFix) {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+      localStorage.setItem('floatState', 'static');
+    } else {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+      localStorage.setItem('floatState', 'fixed');
+    }
+  });
+
+    
+
+    let floatState = localStorage.getItem('floatState');
+    if (!floatState) {
+      floatState = 'static';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    }
+    if (floatState === 'fixed') {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    } else {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+    }
+    
+    localStorage.setItem('floatState', floatState);
+    
+  fontButtonContainer.appendChild(floatingButton);
+
+
+    const infoLink = document.createElement('a');
+    infoLink.textContent = infoText;
+    infoLink.href = infoTextLink;
+    infoLink.target = '_blank';
+    infoLink.style.marginLeft = '8px';
+    infoLink.style.fontSize = '12px';
+    fontButtonContainer.appendChild(infoLink);
+
+    
+    infoLink.classList.add('z-index');
+
+    document.body.insertBefore(fontButtonContainer, document.body.firstChild);
+   
+  });
+  
+  
+
+</script>
+</head>
+<body class="exe-web-site" id="exe-node-180"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header"  style="background-image: url(ssaes.jpg); background-repeat: repeat-x;"><div id="headerContent">Ecoperiodistas de la biodiversidad</div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Ecoperiodistas de la biodiversidad</a></li>
+   <li><a href="qu_y_cmo_vamos_a_aprender.html" class="no-ch">¿Qué y cómo vamos a aprender?</a></li>
+   <li class="current-page-parent"><a href="ecoperiodistas_de_la_biodiversidad.html" class="current-page-parent daddy">Ecoperiodistas de la biodiversidad</a>
+   <ul>
+      <li><a href="el_gran_informe_de_la_biodiversidad.html" class="no-ch">El gran informe de la biodiversidad</a></li>
+      <li id="active"><a href="escuela_de_ecoperiodistas.html" class="active no-ch">Escuela de ecoperiodistas</a></li>
+      <li><a href="nos_convertimos_en_redactores.html" class="no-ch">Nos convertimos en redactores</a></li>
+      <li><a href="de_papel_a_las_ondas.html" class="no-ch">De papel a las ondas</a></li>
+      <li><a href="evaluacin.html" class="no-ch">Evaluación</a></li>
+      <li><a href="autoevaluacin.html" class="no-ch">Autoevaluación</a></li>
+   </ul>
+   </li>
+   <li><a href="ficha_tcnica.html" class="no-ch">Ficha técnica</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="el_gran_informe_de_la_biodiversidad.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="nos_convertimos_en_redactores.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">Escuela de ecoperiodistas</h1></header>
+<article class="iDevice_wrapper UDLcontentIdevice" id="id881">
+<div class="iDevice emphasis0" >
+<div id="ta881_871_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><img src="pareja.png" width="49" height="50">Habéis demostrado que sois capaces de investigar y analizar información.<br>Sin embargo, todavía no sois auténticos EcoPeriodistas.<br>Los ciudadanos necesitan comprender lo que habéis descubierto.<br>Para conseguirlo tendréis que aprender a redactar noticias y reportajes como hacen los periodistas profesionales."</p>
+<p style="text-align: left;"><img src="oficina_periodistas.jpg" width="600" height="600"></p>
+<p style="text-align: left;"><strong>Paso 1</strong></p>
+<p style="text-align: left;">Cada equipo recibe dos noticias:</p>
+<p style="text-align: left;">🐝 Noticia sobre las abejas y los pesticidas.<br>🐟 Noticia sobre la trucha y la sequía.</p>
+<p style="text-align: left;">Tarea<br>Lectura cooperativa.<br>Los alumnos utilizan un rotulador o una herramienta digital para destacar:</p>
+<ul style="text-align: left;">
+<li>Las partes</li>
+<li>Lo más importante.</li>
+<li>Los datos.</li>
+<li>Las opiniones.</li>
+</ul>
+<p style="text-align: left;"><strong>Paso 2:</strong></p>
+<p style="text-align: left;">Material manipulativo<br>Cada grupo recibe tarjetas con los nombres, pero antes vemos las siguientes definiciones:</p>
+<dl class="exe-dl">
+<dt>Titular.</dt>
+<dd>
+<p>&nbsp;Encabezado principal que resume el hecho de forma clara y llamativa.</p>
+</dd>
+<dt>Entradilla.</dt>
+<dd>
+<p>Primer párrafo que sintetiza los datos clave de la noticia.</p>
+</dd>
+</dl>
+<dl class="exe-dl">
+<dt>Desarrollo.</dt>
+<dd>
+<p>Párrafos posteriores con los detalles, causas, consecuencias y datos/opiniones.</p>
+</dd>
+<dt>Fotografía.</dt>
+<dd>
+<p>Imagen conceptual o documental vinculada al suceso (las abejas o la trucha).</p>
+</dd>
+<dt>Pie de foto.</dt>
+<dd>
+<p>Texto breve explicativo debajo de la imagen.</p>
+</dd>
+<dt>Fuente.</dt>
+<dd>
+<p>Origen de la información o agencia de noticias que firma el texto.</p>
+</dd>
+</dl>
+<p><br><br><br>&nbsp;</p>
+<p style="text-align: left;"><span style="font-size: 14pt;"><strong>Desafío</strong></span></p>
+<p style="text-align: left;"><br><strong>Localizar</strong> cada una de estas partes dentro de las noticias analizadas.<br>Cuando la encuentran <strong>colocan las tarjetas encim</strong>a de la noticia.<br>&nbsp;<br><span style="font-size: 14pt;"><strong>Producto</strong></span></p>
+<p style="text-align: left;">Mapa visual de una noticia.</p>
+<p style="text-align: left;"><strong title="noticia pesticidas.pdf">Anexo 1&nbsp;</strong><a href="noticia_pesticidas.pdf" download="noticia pesticidas.pdf" title="noticia pesticidas.pdf" target="_blank" rel="noopener">Noticia abejas</a> y&nbsp;<a href="noticias_truchas.pdf" download="noticias truchas.pdf" title="noticias truchas.pdf" target="_blank" rel="noopener">Noticia truchas</a></p>
+<p style="text-align: left;"><strong>Anexo 2</strong> <a href="Seis_tarjetas_modernas_con_fondo_vibrante.pdf" download="Seis tarjetas modernas con fondo vibrante.pdf" title="Seis tarjetas modernas con fondo vibrante.pdf" target="_blank" rel="noopener">Tarjetas</a></p>
+<p style="text-align: left;"><strong>Anexo 3. </strong><a href="Aviso_de_redireccionamiento.jpeg" title="Aviso de redireccionamiento.jpeg" target="_blank" rel="noopener">Noticia 1,&nbsp;&nbsp;</a></p>
+<p style="text-align: left;"><strong>Anexo 4. </strong><a href="descarga_(1).jpeg" title="descarga (1).jpeg" target="_blank" rel="noopener">Noticia 2</a></p>
+<p style="text-align: left;"><strong>Anexo 5. </strong><a href="descarga.jpeg" title="descarga.jpeg" target="_blank" rel="noopener">Noticia 3</a></p>
+<p style="text-align: left;"><strong>Anexo 6.</strong> <a href="NOTICIA.jpeg" title="NOTICIA.jpeg" target="_blank" rel="noopener">Noticia 4</a></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>¿Qué vamos a hacer?<br>Nos vamos a convertir en periodistas del medio ambiente.</p>
+<p>Trabajaremos para la Agencia de Exploración Sostenible (AES).</p>
+<p>Nuestro objetivo es aprender cómo se escribe una noticia.</p>
+<p>Al final, haremos un Mapa Visual de una Noticia para usarlo de guía.</p>
+<p>📝 Pasos para trabajar en clase<br>Paso 1: Leer y analizar en grupo<br>Nos juntaremos en grupos de 3 o 4 compañeros.<br>Leeremos una noticia real en papel o en la pantalla.<br>Usaremos colores o rotuladores para señalar:</p>
+<p>Las partes de la noticia.<br>La información más importante.<br>Los datos reales (hechos).<br>Las opiniones de las personas.<br>Paso 2: Usar las tarjetas de las partes de la noticia<br>Colocaremos unas tarjetas encima de la noticia para señalar cada parte:</p>
+<p>Titular: Es el título. Cuenta lo más importante con pocas palabras.<br>Entradilla: Es el primer párrafo. Resume la noticia.<br>Cuerpo: Son los párrafos del medio. Explican los detalles, las causas y las consecuencias.<br>Fotografía: Es la imagen que acompaña a la noticia.<br>Pie de foto: Es el texto corto que explica la imagen.<br>Fuente: Dice quién ha escrito o investigado la información.<br>❓ Preguntas para entender la noticia<br>En grupo, responderemos a estas 5 preguntas sobre la noticia:</p>
+<p>¿Qué ha pasado?<br>¿A quién le afecta?<br>¿Por qué ha pasado?<br>¿Qué consecuencias tiene?<br>¿Qué soluciones proponen?</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article><article class="exe-udlContent-content-audio js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Audio</h2></header><p><audio controls="controls" src="escuela_ecoperiodista.m4a"><a href="escuela_ecoperiodista.m4a"></a></audio></p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Orientaciones metodológicas</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>Objetivo de la actividad:</strong> Deconstruir e identificar la estructura formal de una noticia periodística (partes, datos y opiniones) utilizando técnicas de lectura cooperativa y material manipulativo para diseñar un mapa visual de referencia.</p>
+<p><strong>Agrupamiento: </strong>Parejas.</p>
+<p><strong>Pautas de Ejecución en el Aula</strong><br>Gestión del encargo: El alumnado recibe el desafío de la AES para transformarse en redactores. Su cometido es analizar noticias reales para comprender cómo se estructura la información antes de redactar sus propios textos.</p>
+<p><br><strong>Mecánica de resolución:</strong></p>
+<p>Lectura cooperativa y subrayado (Paso 1): Leer los textos de los anexos empezando por noticia de las abejas y noticia de las truchas. Con rotuladores o herramientas digitales de distintos colores, diferenciar:</p>
+<p><strong>Estructura del texto.</strong></p>
+<ul>
+<li>Ideas clave / Lo más importante.</li>
+<li>Datos objetivos y cuantitativos.</li>
+<li>Opiniones o valoraciones de expertos.</li>
+<li>Análisis manipulativo (Paso 2): Identificar la ubicación exacta de los elementos periodísticos usando las tarjetas del Anexo 2 (Titular, Entradilla, Desarrollo, Fotografía, Pie de foto,</li>
+<li>Fuente) y superponerlas sobre la noticia.</li>
+<li>Elaboración del Producto Final: Crear un Mapa visual de una noticia que condense las partes aprendidas y sirva como guía de maquetación para la redacción periodística.</li>
+</ul>
+<p><strong>Criterios clave:</strong></p>
+<p>Localización precisa de las 6 partes de la estructura periodística en el texto físico/digital.<br>Discriminación correcta entre datos objetivos e información basada en opiniones.<br>Claridad, síntesis y calidad del Mapa Visual generado por el equipo.</p></div></div></section></div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper ClozeIdevice em_iDevice em_iDevice_question" id="id12">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">Rellenar huecos</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<section id="ta12_116" class="block instructions iDevice_content">
+<p>Instrucciones: Selecciona o escribe la parte de la estructura periodística que corresponde a cada sección.</p>
+</section>
+
+    <section class="activity" id="activity-12_117"><form name="cloze-form-12_117" action="#" class="activity-form cloze-activity-form"><div id="cloze12_117"><input type="hidden" name="clozeFlag12_117.strictMarking" id="clozeFlag12_117.strictMarking" value="false"/>
+<input type="hidden" name="clozeFlag12_117.checkCaps" id="clozeFlag12_117.checkCaps" value="false"/>
+<input type="hidden" name="clozeFlag12_117.instantMarking" id="clozeFlag12_117.instantMarking" value="false"/>
+<p style="text-align: left;"></p>
+<p style="text-align: left;"><label for="clozeBlank12_117.1" class="sr-av">Rellenar huecos (2):</label><input class="autocomplete-off" type="text" value="" id="clozeBlank12_117.1" style="width:7ch" /><span style="display:none" id="clozeAnswer12_117.1">JXUwMDBjJXUwMDNkJXUwMDFkJXUwMDAxJXUwMDE5JXUwMDBkJXUwMDEz
+</span>: Descubren una nueva especie de rana que ayuda a proteger la biodiversidad del bosque.<br/><label for="clozeBlank12_117.2" class="sr-av">Rellenar huecos (3):</label><input class="autocomplete-off" type="text" value="" id="clozeBlank12_117.2" style="width:10ch" /><span style="display:none" id="clozeAnswer12_117.2">JXUwMDFkJXUwMDJiJXUwMDFhJXUwMDA2JXUwMDEzJXUwMDA1JXUwMDBkJXUwMDA1JXUwMDAwJXUw
+MDBk
+</span>: Un equipo de biólogos ha hallado en la selva una especie capaz de avisar sobre la salud de los árboles y la calidad del agua.<br/><label for="clozeBlank12_117.3" class="sr-av">Rellenar huecos (4):</label><input class="autocomplete-off" type="text" value="" id="clozeBlank12_117.3" style="width:6ch" /><span style="display:none" id="clozeAnswer12_117.3">JXUwMDFiJXUwMDM2JXUwMDEwJXUwMDE3JXUwMDAyJXUwMDFm
+</span>- Causas: El hallazgo se produjo durante una expedición nocturna. Esta especie es fundamental porque se alimenta de insectos que dañan las plantas locales.<br/><label for="clozeBlank12_117.4" class="sr-av">Rellenar huecos (5):</label><input class="autocomplete-off" type="text" value="" id="clozeBlank12_117.4" style="width:6ch" /><span style="display:none" id="clozeAnswer12_117.4">JXUwMDFiJXUwMDM2JXUwMDEwJXUwMDE3JXUwMDAyJXUwMDFm
+</span>- Consecuencias: Sin embargo, la tala masiva de árboles amenaza su hábitat natural, lo que pone en riesgo el equilibrio de toda la región.<br/><label for="clozeBlank12_117.5" class="sr-av">Rellenar huecos (6):</label><input class="autocomplete-off" type="text" value="" id="clozeBlank12_117.5" style="width:10ch" /><span style="display:none" id="clozeAnswer12_117.5">JXUwMDFiJXUwMDJjJXUwMDAxJXUwMDBkJXUwMDBmJXUwMDE5JXUwMDA2JXUwMDFhJXUwMDlhJXUw
+MDlk
+</span>: Los científicos piden declarar la zona como reserva protegida y educar a las comunidades para conservar esta especie.</p><div class="block iDevice_buttons"><p><input class="button" type="submit" name="submit12_117" value="Enviar"  id="submit12_117" />
+<input type="button" name="restart12_117" value="Reiniciar" style="display:none" id="restart12_117" onclick="$exe.cloze.restart('12_117')" />
+ <input type="button" name="12_117showAnswersButton" value="Mostrar las respuestas" style="display:none" id="showAnswersButton12_117" onclick="$exe.cloze.fillInputs('12_117')" />
+<span class="js-hidden js-warning">Habilitar JavaScript</span></p></div><div id="clozeScore12_117"></div></div></form></section></div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id13">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Reflexiona</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta13_900_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: left;"><br>Una vez localizadas las partes de la noticia, cada equipo completa una plantilla, elegid una de las noticias y contestad a las siguientes preguntas:</p>
+<p style="text-align: left;"><br>¿Qué ha ocurrido?<br>&nbsp;<br>¿A quién afecta?<br>&nbsp;<br>¿Por qué ocurre?<br>&nbsp;<br>¿Qué consecuencias tiene?<br>&nbsp;<br>¿Qué soluciones se proponen?</p></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Reconocimiento Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="el_gran_informe_de_la_biodiversidad.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="nos_convertimos_en_redactores.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_style_js.js"></script></body></html>

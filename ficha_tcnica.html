@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>Ficha técnica | Ecoperiodistas de la biodiversidad </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Javier Martínez Garrido" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.9 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<link rel="stylesheet" type="text/css" href="udl-content.css" />
+<script type="text/javascript" src="udl-content.js"></script>
+<link rel="stylesheet" type="text/css" href="download-package.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"  type="text/css">
+
+
+<style>
+  
+  .z-index {
+    z-index: 999;
+  }
+
+  .select-container {
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+  }
+
+  .font-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    z-index: 999;
+  }
+
+  .fontButtonContainer {
+     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* establece el wrap para que los botones se distribuyan en varias líneas */
+    gap: 5px; /* ajusta el espacio entre los botones */
+    position: static; /* fija la barra de botones en la página: static para que aparezca en la parte superior, fixed para que quede flotando */
+    top: 40px; /* fija la barra de botones en la parte superior de la página */
+    left: 0; /* fija la barra de botones en el margen izquierdo */
+    right: 0; /* fija la barra de botones en el margen derecho */
+    margin: auto; /* centra la barra de botones horizontalmente */
+  }
+    
+  /* Estilo para el desplegable */
+  select {
+    padding: 8px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+  }
+  
+  select option {
+  text-align: left;
+  }
+  
+</style>
+
+<script>
+
+// BatexeGo v3 Juan José de Haro 
+
+// Define los textos que se ven en pantalla. Reemplazar el texto entre comillas
+
+  // Textos del menú desplegable
+    const defaultText = 'Parámetros por defecto:'; //Descripción de la opción por defecto
+    const standardText = 'Fuente estándar'; // Fuente original del documento
+    
+    const dyslexicDesc = 'Dislexia:'; // Descripción de la opción OpenDyslexic  
+    const dyslexicText = 'OpenDyslexic'; 
+    
+    const hyperlegibleDesc = 'Deficiencias visuales:'; // Descripción de la opción Atkinson Hyperlegible
+    const hyperlegibleText = 'Atkinson Hyperlegible'; 
+    
+    const highLegibilityDesc = 'Alta legibilidad:'; // Descripción de las opciones de alta legibilidad
+    const opensansText = 'OpenSans'; 
+    const robotoText = 'Roboto'; 
+    const latoText = 'Lato'; 
+    const montserratText = 'Montserrat'; 
+
+  // Botones aumentar y disminuir fuente
+    const increaseFontText = 'A+'; // Botón para incrementar la fuente
+    const increaseFontTitle = 'Incrementa la fuente'; // Texto emergente al pasar el ratón
+    
+    const decreaseFontText = 'A-'; // Botón para reducir la fuente
+    const decreaseFontTitle = 'Reduce la fuente'; // Texto emergente al pasar el ratón
+
+  // Botón para traducir
+    const translateText = '🌐'; // Texto para el botón de traducción de Google
+    const translateTitle = 'Traduce la página'; // Texto emergente al pasar el ratón
+
+  // Botón para leer / detener la lectura en voz alta
+    let readText = 'Leer'; // Botón para leer en voz alta el contenido de la página
+    const readTextTitle ='Lee en voz alta la selección o la página entera'; // Texto emergente al pasar el ratón
+    
+    const stopText = 'Detener'; // Texto del botón para detener la lectura
+    const stopTextTitle = 'Detiene la lectura'; // Texto emergente al pasar el ratón
+  
+  // Botones para que los botones estén siempre visibles
+    let floatingFix = 'Fijar'; // Texto del botón flotante cuando está sobre el texto
+    let floatingFixTitle = 'Fija la barra de botones en la parte superior'; // Texto emergente al pasar el ratón
+    
+    let floatingFloat = 'Flotar'; //Texto del botón flotante cuando está fijo en la parte superior
+    let floatingFloatTitle = 'La barra permanecerá siempre visible';
+  
+  
+  // Enlace +Info
+    const infoText = '+Info'; // Texto del enlace +Info
+    const infoTextLink = 'https://batexego.bilateria.org'; // Destino del enlace de +Info
+
+// Fin 
+  
+
+  readText = `${readText} (${document.documentElement.lang})`; //Se añade el idioma al botón Leer
+  
+
+  let originalFont;
+  let currentFontSize;
+  let originalFontSize;
+  let isReading = false;
+  let utterance = new SpeechSynthesisUtterance();
+  let googleTranslateWidgetVisible = localStorage.getItem('googleTranslateWidgetVisible');
+
+  function setFont(font) {
+  document.body.style.fontFamily = font;
+  localStorage.setItem('font', font);
+  }
+
+  function setFontSize(size) {
+  currentFontSize = parseInt(window.getComputedStyle(document.body).getPropertyValue('font-size'));
+  currentFontSize += size;
+  document.body.style.fontSize = currentFontSize + 'px';
+  localStorage.setItem('fontSize', currentFontSize + 'px');
+  }
+  
+  
+
+function toggleGoogleTranslateWidget() {
+  if (!googleTranslateWidgetVisible) {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'google-translate-script';
+    document.head.appendChild(script);
+    
+    const googleTranslateElement = document.createElement('div');
+    googleTranslateElement.id = 'google_translate_element';
+    googleTranslateElement.style.position = 'fixed';
+    googleTranslateElement.style.top = '0';
+    googleTranslateElement.style.right = '0';
+    googleTranslateElement.style.zIndex = '1000';
+    document.body.appendChild(googleTranslateElement);
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'auto', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+    };
+
+    googleTranslateWidgetVisible = true;
+    
+  } else {
+    const script = document.getElementById('google-translate-script');
+    script.remove();
+    
+    const googleTranslateElement = document.getElementById('google_translate_element');
+    googleTranslateElement.remove();
+
+    googleTranslateWidgetVisible = false;
+  }
+  localStorage.setItem('googleTranslateWidgetVisible',googleTranslateWidgetVisible);
+}
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    googleTranslateWidgetVisible = JSON.parse(localStorage.getItem('googleTranslateWidgetVisible'));
+  if(googleTranslateWidgetVisible) {
+    googleTranslateWidgetVisible = false;
+    toggleGoogleTranslateWidget();
+  }
+
+    
+  
+    originalFont = window.getComputedStyle(document.body).getPropertyValue('font-family');
+    localStorage.setItem('originalFont', originalFont);
+    let font = localStorage.getItem('font');
+    if (!font) {
+    font = originalFont;
+    }
+    document.body.style.fontFamily = font;
+
+    let fontSize = localStorage.getItem('fontSize');
+    originalFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    localStorage.setItem('originalFontSize', originalFontSize);
+    if (!fontSize) {
+    fontSize = originalFontSize
+    localStorage.setItem('fontSize', fontSize);
+    }
+    document.body.style.fontSize = fontSize;
+
+    const fontButtonContainer = document.createElement('div');
+    fontButtonContainer.classList.add('fontButtonContainer'); 
+    
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select = document.createElement('select');
+    select.classList.add('z-index');
+    const standardOption = document.createElement('option');
+    standardOption.value = 'standard';
+    standardOption.text = standardText;
+
+    const defaultFontOptGroup = document.createElement('optgroup');
+    defaultFontOptGroup.label = defaultText;
+    defaultFontOptGroup.appendChild(standardOption);
+
+    select.appendChild(defaultFontOptGroup);
+
+
+    const dyslexicOption = document.createElement('option');
+    dyslexicOption.value = 'dyslexic';
+    dyslexicOption.text = dyslexicText;
+    select.add(dyslexicOption);
+
+    const dyslexicOptGroup = document.createElement('optgroup');
+    dyslexicOptGroup.label = dyslexicDesc;
+    dyslexicOptGroup.appendChild(dyslexicOption);
+    select.appendChild(dyslexicOptGroup);
+
+    const hyperlegibleOption = document.createElement('option');
+    hyperlegibleOption.value = 'hyperlegible';
+    hyperlegibleOption.text = hyperlegibleText;
+    select.add(hyperlegibleOption);
+
+    const hyperlegibleOptGroup = document.createElement('optgroup');
+    hyperlegibleOptGroup.label = hyperlegibleDesc;
+    hyperlegibleOptGroup.appendChild(hyperlegibleOption);
+    select.appendChild(hyperlegibleOptGroup);
+
+    const opensansOption = document.createElement('option');
+    opensansOption.value = 'Open Sans';
+    opensansOption.text = opensansText;
+    select.add(opensansOption);
+
+    const robotoOption = document.createElement('option');
+    robotoOption.value = 'Roboto';
+    robotoOption.text = robotoText;
+    select.add(robotoOption);
+
+    const latoOption = document.createElement('option');
+    latoOption.value = 'Lato';
+    latoOption.text = latoText;
+    select.add(latoOption);
+
+    const montserratOption = document.createElement('option');
+    montserratOption.value = 'Montserrat';
+    montserratOption.text = montserratText;
+    select.add(montserratOption);  
+    
+
+    const highLegibilityOptGroup = document.createElement('optgroup');
+    highLegibilityOptGroup.label = highLegibilityDesc;
+    highLegibilityOptGroup.appendChild(latoOption);
+    highLegibilityOptGroup.appendChild(montserratOption);
+    highLegibilityOptGroup.appendChild(opensansOption);
+    highLegibilityOptGroup.appendChild(robotoOption);
+    
+    
+    
+    select.appendChild(highLegibilityOptGroup);
+
+    // Seleccionar la opción correspondiente al cargar la página
+    if (font === originalFont) { // Nueva condición
+    select.selectedIndex = 0; // Nueva línea
+    } else if (font === 'OpenDyslexic') {
+    select.selectedIndex = 1;
+    } else if (font === 'Atkinson Hyperlegible') {
+    select.selectedIndex = 2;
+    } else if (font === 'Roboto') {
+    select.selectedIndex = 6;
+    } else if (font === 'Lato') {
+    select.selectedIndex = 3;
+    } else if (font === 'Open Sans') {
+    select.selectedIndex = 5;
+    } else if (font === 'Montserrat') {
+    select.selectedIndex = 4;
+    }
+
+    select.addEventListener('change', () => {
+    const font = select.value;
+    if (font === 'standard') {
+    setFont(originalFont);
+    fontSize = originalFontSize;
+    localStorage.setItem('fontSize', fontSize);
+    document.body.style.fontSize = localStorage.getItem('originalFontSize');
+    } else if (font === 'dyslexic') {
+    setFont('OpenDyslexic');
+    } else if (font === 'hyperlegible') {
+    setFont('Atkinson Hyperlegible');
+    } else if (font === 'Open Sans') {
+    setFont('Open Sans');
+    } else if (font === 'Roboto') {
+    setFont('Roboto');
+    } else if (font === 'Lato') {
+    setFont('Lato');
+    }  else if (font === 'Montserrat') {
+    setFont('Montserrat');
+    }
+    });
+
+    selectContainer.appendChild(select);
+    fontButtonContainer.appendChild(selectContainer);
+    
+
+    const increaseFontButton = document.createElement('button');
+    increaseFontButton.classList.add('font-button');
+    increaseFontButton.textContent = increaseFontText;
+    increaseFontButton.setAttribute('title', increaseFontTitle);
+    increaseFontButton.addEventListener('click', () => setFontSize(1));
+    fontButtonContainer.appendChild(increaseFontButton);
+
+    const decreaseFontButton = document.createElement('button');
+    decreaseFontButton.classList.add('font-button');
+    decreaseFontButton.textContent = decreaseFontText;
+    decreaseFontButton.setAttribute('title', decreaseFontTitle);
+    decreaseFontButton.addEventListener('click', () => setFontSize(-1));
+    fontButtonContainer.appendChild(decreaseFontButton);
+    
+    const translateButton = document.createElement('button');
+    translateButton.classList.add('font-button');
+    translateButton.textContent = translateText;
+    translateButton.setAttribute('title', translateTitle);
+    translateButton.addEventListener('click', toggleGoogleTranslateWidget);
+    fontButtonContainer.appendChild(translateButton);
+
+  // Botón para leer en voz alta
+    const readButton = document.createElement('button');
+    readButton.classList.add('font-button');
+    readButton.textContent = readText;
+    readButton.setAttribute('title', readTextTitle);
+    
+    readButton.addEventListener('click', () => {
+    let selectedText = window.getSelection().toString();
+    let text = '';
+    let lang = document.documentElement.lang;
+    if (selectedText !== '') {
+      text = selectedText;
+      let selectedNode = window.getSelection().anchorNode;
+      while (selectedNode && selectedNode.nodeType !== Node.ELEMENT_NODE) {
+        selectedNode = selectedNode.parentNode;
+      }
+      if (selectedNode) {
+        const selectedLang = selectedNode.getAttribute('lang');
+        if (selectedLang) {
+          lang = selectedLang;
+        }
+      }
+    } else {
+      text = document.body.innerText;
+      const bodyLang = document.body.getAttribute('lang');
+      if (bodyLang) {
+        lang = bodyLang;
+      }
+    }
+
+    utterance.lang = lang;
+    utterance.text = text;
+
+    if (!isReading) {
+      isReading = true;
+      readButton.textContent = `${stopText} (${lang})`;
+      readButton.setAttribute('title', stopTextTitle);
+      speechSynthesis.speak(utterance);
+    } else {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+      speechSynthesis.cancel();
+    }
+
+    utterance.addEventListener('end', () => {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+    });
+  });  
+    
+    fontButtonContainer.appendChild(readButton);
+    
+  // Botón para que la barra esté siempre visible
+    const floatingButton = document.createElement('button');
+    floatingButton.classList.add('font-button');
+    floatingButton.textContent = floatingFloat;
+    floatingButton.setAttribute('title', floatingFloatTitle);
+    floatingButton.addEventListener('click', () => {
+    if (floatingButton.textContent === floatingFix) {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+      localStorage.setItem('floatState', 'static');
+    } else {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+      localStorage.setItem('floatState', 'fixed');
+    }
+  });
+
+    
+
+    let floatState = localStorage.getItem('floatState');
+    if (!floatState) {
+      floatState = 'static';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    }
+    if (floatState === 'fixed') {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    } else {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+    }
+    
+    localStorage.setItem('floatState', floatState);
+    
+  fontButtonContainer.appendChild(floatingButton);
+
+
+    const infoLink = document.createElement('a');
+    infoLink.textContent = infoText;
+    infoLink.href = infoTextLink;
+    infoLink.target = '_blank';
+    infoLink.style.marginLeft = '8px';
+    infoLink.style.fontSize = '12px';
+    fontButtonContainer.appendChild(infoLink);
+
+    
+    infoLink.classList.add('z-index');
+
+    document.body.insertBefore(fontButtonContainer, document.body.firstChild);
+   
+  });
+  
+  
+
+</script>
+</head>
+<body class="exe-web-site" id="exe-node-182"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header"  style="background-image: url(ssaes.jpg); background-repeat: repeat-x;"><div id="headerContent">Ecoperiodistas de la biodiversidad</div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Ecoperiodistas de la biodiversidad</a></li>
+   <li><a href="qu_y_cmo_vamos_a_aprender.html" class="no-ch">¿Qué y cómo vamos a aprender?</a></li>
+   <li><a href="ecoperiodistas_de_la_biodiversidad.html" class="daddy">Ecoperiodistas de la biodiversidad</a>
+   <ul class="other-section">
+      <li><a href="el_gran_informe_de_la_biodiversidad.html" class="no-ch">El gran informe de la biodiversidad</a></li>
+      <li><a href="escuela_de_ecoperiodistas.html" class="no-ch">Escuela de ecoperiodistas</a></li>
+      <li><a href="nos_convertimos_en_redactores.html" class="no-ch">Nos convertimos en redactores</a></li>
+      <li><a href="de_papel_a_las_ondas.html" class="no-ch">De papel a las ondas</a></li>
+      <li><a href="evaluacin.html" class="no-ch">Evaluación</a></li>
+      <li><a href="autoevaluacin.html" class="no-ch">Autoevaluación</a></li>
+   </ul>
+   </li>
+   <li id="active"><a href="ficha_tcnica.html" class="active no-ch">Ficha técnica</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="autoevaluacin.html" class="prev"><span><span>&laquo; </span>Anterior</span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">Ficha técnica</h1></header>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice" id="id885">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">FICHA TÉCNICA</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta885_408_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><table border="1" style="height: 2561.96px; width: 100%;" class="exe-table">
+<tbody>
+<tr style="height: 40.5789px;">
+<td style="width: 1507px; text-align: center; height: 40.5789px;" colspan="3"><strong>DATOS IDENTIFICATIVOS</strong></td>
+</tr>
+<tr style="height: 56.5726px;">
+<td style="width: 1507px; height: 56.5726px;" colspan="3">
+<p><strong>TÍTULO: Ecoperiodistas de la biodiversidad</strong></p>
+</td>
+</tr>
+<tr style="height: 96.5708px;">
+<td style="width: 498.328px; height: 96.5708px;"><strong>ETAPA: 3º ciclo</strong></td>
+<td style="width: 498.328px; height: 96.5708px;"><strong>CURSO: 5º y 6º de primaria</strong></td>
+<td style="width: 498.344px; height: 96.5708px;">
+<p><strong>ÁREA/MATERIA: Ciencias naturales</strong></p>
+<p><strong>Lengua castellana</strong></p>
+</td>
+</tr>
+<tr style="height: 184.578px;">
+<td style="width: 1507px; height: 184.578px;" colspan="3">
+<p><strong>DESCRIPCIÓN: </strong></p>
+<p>La situación de aprendizaje "EcoPeriodistas de la Biodiversidad" se desarrolla a través de una narrativa gamificada en la que el alumnado se convierte en miembro de la Agencia de Exploración Sostenible (AES). A partir de diferentes misiones de investigación, los equipos de trabajo deberán descubrir cómo determinadas amenazas ambientales afectan a las especies y ecosistemas de su entorno a través de la radio y el periodismo..</p>
+<p><strong></strong></p>
+</td>
+</tr>
+<tr style="height: 416.611px;">
+<td style="width: 1507px; height: 416.611px;" colspan="3">
+<p><strong>JUSTIFICACIÓN Y CONTEXTUALIZACIÓN:</strong></p>
+<p>Esta Situación de Aprendizaje tiene como finalidad desarrollar el pensamiento científico, computacional y comunicativo a través de una investigación sobre la biodiversidad y las amenazas que afectan a diferentes especies. Para ello, el alumnado se convierte en miembro de la Agencia de Exploración Sostenible (AES) y asume el papel de EcoPeriodista, investigando problemas ambientales reales y comunicando sus conclusiones a través de distintos formatos periodísticos.<br>La propuesta combina procesos de:</p>
+<ul>
+<li>Observación y clasificación de seres vivos.</li>
+<li>Investigación y búsqueda de información fiable.</li>
+<li>Análisis de causas, consecuencias y posibles soluciones.</li>
+<li>Resolución de problemas mediante pensamiento computacional.</li>
+<li>Elaboración de noticias, entrevistas y reportajes.</li>
+</ul>
+<p><br>Además, integra contenidos de Lengua Castellana relacionados con la comprensión y producción de textos periodísticos, la búsqueda y selección de información, la expresión oral y la argumentación. Todo ello culmina con la creación de un programa de Radio AES, convirtiendo al alumnado en protagonista de su aprendizaje y favoreciendo el desarrollo de una ciudadanía crítica, responsable y comprometida con la conservación de la biodiversidad.</p>
+</td>
+</tr>
+<tr style="height: 40.5789px;">
+<td style="width: 1507px; height: 40.5789px; text-align: center;" colspan="3"><strong>CONEXIÓN CON LOS ELEMENTOS CURRICULARES</strong></td>
+</tr>
+<tr style="height: 216.593px;">
+<td style="width: 1507px; height: 216.593px;" colspan="3">
+<p><strong>OBJETIVOS:</strong></p>
+<ul>
+<li>Investigar especies y problemas ambientales para comprender cómo afectan a la biodiversidad y proponer posibles soluciones.</li>
+<li>Aplicar el pensamiento computacional y la programación con Codey Rocky para resolver retos relacionados con la investigación ambiental.</li>
+<li>Buscar, seleccionar y transformar información en noticias y reportajes utilizando las características de los textos periodísticos.</li>
+<li>Comunicar investigaciones mediante programas de radio, entrevistas y debates, utilizando técnicas de expresión oral, elaboración de guiones y diseño de portadas informativas.<br><br>&nbsp;</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 264.602px;">
+<td style="width: 1507px; height: 264.602px;" colspan="3">
+<p><strong>COMPETENCIAS ESPECÍFICAS:</strong></p>
+<ul>
+<li>Investigar y comprender los problemas que afectan a la biodiversidad, analizando las relaciones entre los seres vivos, los ecosistemas y la acción humana.</li>
+<li>Resolver retos mediante el pensamiento computacional y la programación, organizando información, estableciendo relaciones y aplicando soluciones tecnológicas.</li>
+<li>Buscar, seleccionar, contrastar y comunicar información mediante noticias y reportajes, utilizando de forma adecuada los géneros periodísticos y las estrategias de comprensión y producción textual.</li>
+<li>Planificar, crear y difundir contenidos para la radio escolar, empleando técnicas de expresión oral, entrevistas, debates, diseño de portadas y recursos digitales para comunicar mensajes de interés social y ambiental.<br>&nbsp;<strong><br>&nbsp;</strong></li>
+</ul>
+</td>
+</tr>
+<tr style="height: 712.675px;">
+<td style="width: 1002.66px; height: 712.675px;" colspan="2">
+<p><strong>CRITERIOS DE EVALUACIÓN:</strong></p>
+<p>Ciencias de la Naturaleza</p>
+<p>Criterio 1.2 (Área de Ciencias de la Naturaleza): Buscar, seleccionar y contrastar información, realizando investigaciones sencillas a partir de diferentes fuentes seguras y fiables, utilizando el pensamiento científico, analizando las causas y consecuencias de los problemas planteados y proponiendo soluciones razonadas. (De este criterio nace el referente a la investigación de especies y sus amenazas de conservación).<br>Criterio 2.3 (Área de Ciencias de la Naturaleza): Resolver problemas y retos mediante el uso del pensamiento computacional, la programación visual por bloques y la robótica educativa, analizando y evaluando las soluciones obtenidas de manera eficaz. (De este criterio nace el uso de la programación y el robot Codey Rocky).</p>
+<p>Lengua Castellana y Literatura</p>
+<p>Criterio 3.1 (Área de Lengua Castellana y Literatura): Buscar, seleccionar y contrastar información procedente de diferentes fuentes, incluidas las digitales, de manera guiada, evaluando su fiabilidad y reconociendo algunos riesgos de manipulación y desinformación, para transformarla en conocimiento propio y comunicarla de manera clara, rigurosa y respetuosa. (De este criterio nace la adaptación para seleccionar y transformar información en noticias y reportajes periodísticos).<br>Criterio 1.1 / 1.2 (Área de Lengua Castellana y Literatura): Expresar de forma oral o signada contenidos e ideas con coherencia, claridad y corrección, utilizando recursos verbales y no verbales adecuados, en diferentes situaciones comunicativas y formatos (como los medios de comunicación escolar y radiofónicos). (De este criterio nace la elaboración de contenidos radiofónicos, guiones y entrevistas).</p>
+<p><br>&nbsp;<strong><br>&nbsp;<br>&nbsp;</strong></p>
+</td>
+<td style="width: 498.344px; height: 712.675px;">
+<p><strong>SABERES:</strong></p>
+<p>Ciencia y sostenibilidad<br>Los seres vivos, los ecosistemas y la biodiversidad.<br>Interacciones entre los elementos de los ecosistemas y efectos de la acción humana sobre el medio natural.<br>Actitudes de conservación, protección y mejora del entorno.<br>- Pensamiento computacional y tecnología<br>Estrategias de pensamiento computacional: clasificación, secuenciación, reconocimiento de patrones y resolución de problemas.<br>Uso de herramientas digitales y recursos tecnológicos para investigar, crear y comunicar información.</p>
+<p>- Comunicación e información periodística<br>Estrategias de búsqueda, selección y contraste de información procedente de fuentes fiables.<br>Comprensión y producción de textos informativos y periodísticos.<br>La noticia, la entrevista y el reportaje como géneros de comunicación.<br>- Expresión oral, radio y comunicación multimodal<br>Interacción oral, escucha activa y participación en situaciones comunicativas.<br>Planificación y producción de textos orales y multimodales.<br>Uso de recursos digitales para el diseño, la difusión y la comunicación de contenidos.</p>
+</td>
+</tr>
+<tr style="height: 120.575px;">
+<td style="width: 1507px; height: 120.575px;" colspan="3">
+<p><strong>METODOLOGÍA:</strong></p>
+<p>Esta SA se basa en el aprendizaje basado en proyectos, en el que el alumnado trabajará de forma autónoma siendo protagonista de su propio aprendizaje y nuestra función será guiarles a lo largo de toda la situación. Al final del proyecto cada equipo creará un producto como resultado de lo aprendido a lo largo de la secuencia competencial.</p>
+</td>
+</tr>
+<tr style="height: 64.5833px;">
+<td style="width: 498.328px; height: 64.5833px;">
+<p><strong>TEMPORALIZACIÓN: 20&nbsp; sesiones</strong></p>
+</td>
+<td style="width: 498.328px; height: 64.5833px;"><strong>AGRUPAMIENTOS: </strong>Individual, parejas, equipos de 4/5 miembros y gran grupo.</td>
+<td style="width: 498.344px; height: 64.5833px;"><strong>ESPACIOS: </strong>Aulas y aula del futuro</td>
+</tr>
+<tr style="height: 40.5789px;">
+<td style="width: 1507px; height: 40.5789px; text-align: center;" colspan="3"><strong>SECUENCIA COMPETENCIAL</strong></td>
+</tr>
+<tr style="height: 80.5726px;">
+<td style="width: 1002.66px; height: 193.718px;" colspan="2" rowspan="3"><strong>TAREA:&nbsp; </strong>Relación menú&nbsp;</td>
+<td style="width: 498.344px; height: 80.5726px;">
+<p><strong>PRODUCTO:</strong></p>
+<p><strong>-</strong> DIseño de una noticia</p>
+<p>- Diseño de un programa de radio informativo</p>
+</td>
+</tr>
+<tr style="height: 56.5726px;">
+<td style="width: 498.344px; height: 56.5726px;">
+<p><strong>INSTRUMENTOS DE EVALUACIÓN:</strong></p>
+<p>- Rúbricas evaluación radio y portada</p>
+<p>- Escalas de observación</p>
+<p>- Productos</p>
+<p>- Cooevaluación</p>
+<p>- Autoevaluación</p>
+</td>
+</tr>
+<tr style="height: 56.5726px;">
+<td style="width: 498.344px; height: 56.5726px;">
+<p><strong>RECURSOS: </strong>Vease cada uno de los apartados</p>
+</td>
+</tr>
+<tr style="height: 56.5726px;">
+<td style="height: 113.145px; width: 1002.66px;" colspan="2" rowspan="2">
+<p><strong>ACTIVIDADES Y EJERCICIOS:</strong></p>
+<p><strong>O</strong></p>
+<p><strong></strong></p>
+</td>
+<td style="width: 498.344px; height: 56.5726px;">
+<p><strong>INSTRUMENTOS DE EVALUACIÓN:</strong></p>
+<p>Orientaciones metodológicas en sesiones</p>
+</td>
+</tr>
+<tr style="height: 56.5726px;">
+<td style="width: 498.344px; height: 56.5726px;">
+<p><strong>RECURSOS: </strong>Adjuntos tareas</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><span style="font-size: 14pt;"><strong></strong></span></p></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper download-packageIdevice em_iDevice" id="id886">
+<div class="iDevice emphasis1">
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Descargar el fichero fuente</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div class="block iDevice_content" id="ta886_409_2">
+<div class="exe-download-package-instructions"><table class="exe-table"><caption>Información general sobre este recurso educativo</caption>
+<tbody>
+<tr>
+<th>Título</th>
+<td>Ecoperiodistas de las biodiversidad</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td>La situación de aprendizaje "EcoPeriodistas de la Biodiversidad" se desarrolla a través de una narrativa gamificada en la que el alumnado se convierte en miembro de la Agencia de Exploración Sostenible (AES). A partir de diferentes misiones de investigación, los equipos de trabajo deberán descubrir cómo determinadas amenazas ambientales afectan a las especies y ecosistemas de su entorno a través de la radio y el periodismo..</td>
+</tr>
+<tr>
+<th>Autor</th>
+<td>Javier Martínez Garrido</td>
+</tr>
+<tr>
+<th>'Licencia'</th>
+<td><a class="cc cc-by-sa" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license"><span></span>Creative Commons BY-SA 4.0</a></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">Este contenido fue creado con <a href="http://exelearning.net/">eXeLearning</a>, el editor libre y de fuente abierta diseñado para crear recursos educativos.</p>
+<p>Se ha publicado bajo Licencia Creative Commons Reconocimiento Compartir igual 4.0. Esto significa que tienes la posibilidad de poder usarlo, descargarlo, redistribuirlo y modificarlo para adaptarlo a tus necesidades.</p>
+<p>Sigue estos pasos para usar/redistribuir/modificar este REA:<br/>1. Descarga el archivo fuente. Con esto tienes el recurso original en formato editable:</p>
+<p>2. Modifícalo usando eXeLearning.</p>
+<p>3. Si lo modificas, has de reconocer la autoría y publicarlo con la misma licencia (CC BY-SA 4.0).</p>
+<p>Puedes usar esta cita para referenciarlo:</p>
+<p style="text-align: justify;"><em>Este REA es una adaptación del recurso original <strong>"Ecoperiodistas de la biodiversidad"</strong></em> <em>del Proyecto REACLM Consejería de Educación, Cultura y Deportes de Castilla La Mancha, que lo distribuye bajo licencia de CC BY-SA 4.0.</em></p></div><p class="exe-download-package-link"><a href="ecoperiodistasJavierMartinezGarrido.elp">Descargar el fichero .elp</a></p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Reconocimiento Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="autoevaluacin.html" class="prev"><span><span>&laquo; </span>Anterior</span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_style_js.js"></script></body></html>
